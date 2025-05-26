@@ -1,0 +1,36 @@
+# Node modules
+node_modules/
+
+# Build output (Parcel)
+dist/
+.cache/
+
+# dotenv environment files
+.env
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Mac system files
+.DS_Store
+
+# Editor directories and files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Parcel cache
+.parcel-cache/
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+
+# Optional: lock files (if you use yarn or pnpm and prefer npm)
+# yarn.lock
+# pnpm-lock.yaml

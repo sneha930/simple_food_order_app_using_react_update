@@ -2,14 +2,17 @@ import Shimmer from "./Shimmer";
 import RestaurantCategory from "./RestaurantCategory";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
+import { useState } from "react";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
   const resInfo = useRestaurantMenu(resId);
 
-  if (!resInfo) return <Shimmer />;
+  // console.log(resInfo?.data?.cards);
 
-  console.log(resInfo?.data?.cards);
+  const[showIndex, setShowIndex] = useState(null);
+
+  if (!resInfo) return <Shimmer />;
 
   // Step 1: Extract REGULAR cards
   const allCards = resInfo?.data?.cards || [];
@@ -34,7 +37,7 @@ const RestaurantMenu = () => {
     }
   }
 
-  console.log("Final categories:", categories);
+  // console.log("Final categories:", categories);
 
   return (
     <div className="p-4">
@@ -42,7 +45,11 @@ const RestaurantMenu = () => {
 
       {categories.length > 0 ? (
         categories.map((category, index) => (
-          <RestaurantCategory key={category?.title + index} data={category} />
+          <RestaurantCategory key={category?.title + index} data={category} 
+          showItems={index === showIndex ? true : false}
+          // setShowIndex={() => setShowIndex(index)}
+          setShowIndex={() => setShowIndex(prev => (prev === index ? null : index))}
+          />
         ))
       ) : (
         <p>No categories found.</p>
